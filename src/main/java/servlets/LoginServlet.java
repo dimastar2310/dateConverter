@@ -16,25 +16,24 @@ import org.json.JSONObject;
 
 public class LoginServlet extends HttpServlet {
 
-   @Override
-protected void doGet(HttpServletRequest request, HttpServletResponse response) //the user sends does parameters
+@Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                //what api wants? for example https://www.hebcal.com/converter?cfg=json&gy=2023&gm=06&gd=14
+        // Retrieve the foreign date parameter from the request
         String foreignDate = request.getParameter("foreignDate");
+
+        // Construct the Hebcal API URL
         String hebcalAPIUrl = "https://www.hebcal.com/converter?cfg=json&gy="
                 + foreignDate.substring(0, 4) + "&gm=" + foreignDate.substring(5, 7) + "&gd="
                 + foreignDate.substring(8, 10);
 
-        // Make an HTTP request to the Hebcal API
+        // Make an HTTP GET request to the Hebcal API
         URL url = new URL(hebcalAPIUrl);
-        //the url.openConnection is superclas we want to be speciffific 
-        //we adding additional functionality 
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
-        conn.setRequestProperty("Accept", "application/json");
 
         // Read the response from the Hebcal API
-        Scanner scanner = new Scanner(conn.getInputStream(), "UTF-8");  // Set the scanner encoding to UTF-8
+        Scanner scanner = new Scanner(conn.getInputStream(), "UTF-8");
         StringBuilder sb = new StringBuilder();
         while (scanner.hasNextLine()) {
             sb.append(scanner.nextLine());
@@ -49,7 +48,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) /
         response.setContentType("text/html; charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
 
-        // Create a PrintWriter to write the HTML response ,we sending request back to user
+        // Create a PrintWriter to write the HTML response
         PrintWriter out = response.getWriter();
 
         // Write the HTML response
@@ -62,8 +61,11 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) /
     private String extractHebrewDateFromResponse(String jsonResponse) {
         // Parse the JSON response and extract the Hebrew date
         JSONObject jsonObject = new JSONObject(jsonResponse);
-        //String hebDate = jsonObject.getString("hy");
-        String hebDate = jsonObject.getString("hebrew");
+        int hy = jsonObject.getInt("hy");
+        String hm = jsonObject.getString("hm");
+        int hd = jsonObject.getInt("hd");
+        String hebrew = jsonObject.getString("hebrew");
+        String hebDate = hy + " " + hm + " " + hd + ", " + hebrew;
         return hebDate;
     }
 }
