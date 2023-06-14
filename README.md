@@ -11,10 +11,7 @@ actions >show in browser http://localhost:8080/simplewebapp2/ and you see the Da
 how you use it ?
 
 
-![Alt text]([image link](https://github.com/dimastar2310/dateConverter/blob/main/resources/first.png)https://github.com/dimastar2310/dateConverter/blob/main/resources/first.png))
-
-![Alt text]([image link](https://github.com/dimastar2310/dateConverter/blob/main/resources/first.png)https://github.com/dimastar2310/dateConverter/blob/main/resources/second.png))
-
-
-![Alt text]([image link](https://github.com/dimastar2310/dateConverter/blob/main/resources/first.png)https://github.com/dimastar2310/dateConverter/blob/main/resources/third.png))
+![Alt text](https://github.com/dimastar2310/dateConverter/blob/main/resources/first.png)
+![Alt text](https://github.com/dimastar2310/dateConverter/blob/main/resources/second.png)
+![Alt text](https://github.com/dimastar2310/dateConverter/blob/main/resources/third.png)
 
